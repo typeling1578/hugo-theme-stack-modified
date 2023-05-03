@@ -42,7 +42,7 @@
             <div>
                 {{ partial "helper/icon" "update" }}
                 <time class="article-time--lastmod">
-                    {{- .Lastmod.Format (or .Site.Params.dateFormat.published "Jan 02, 2006") -}}
+                    {{- .Lastmod.Format (or .Site.Params.dateFormat.lastUpdated "Jan 02, 2006") -}}
                 </time>
             </div>
         {{ end }}
