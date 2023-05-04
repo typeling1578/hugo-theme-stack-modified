@@ -1,3 +1,5 @@
+import * as params from '@params';
+
 interface pageData {
     title: string,
     date: string,
@@ -186,7 +188,16 @@ class Search {
     private async doSearch(keywords: string[]) {
         const startTime = performance.now();
 
-        const results = await this.searchKeywords(keywords);
+        let results;
+        if (params.serverSideSearchEndpoint) {
+            results = await (
+                await fetch(
+                    `${params.serverSideSearchEndpoint}/?keywords=${encodeURIComponent(keywords.join(" "))}`
+                )
+            ).json();
+        } else {
+            results = await this.searchKeywords(keywords);
+        }
         this.clear();
 
         for (const item of results) {

@@ -25,7 +25,7 @@
     window.searchResultTitleTemplate = "{{ T `search.resultTitle` }}"
 </script>
 
-{{- $opts := dict "minify" hugo.IsProduction "JSXFactory" "createElement" -}}
+{{- $opts := dict "minify" hugo.IsProduction "JSXFactory" "createElement"  "params" (dict "serverSideSearchEndpoint" .Site.Params.serverSideSearchEndpoint) -}}
 {{- $searchScript := resources.Get "ts/search.tsx" | js.Build $opts -}}
 <script type="text/javascript" src="{{ $searchScript.RelPermalink }}" defer></script>
 
