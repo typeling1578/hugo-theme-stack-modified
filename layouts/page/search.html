@@ -1,8 +1,10 @@
 {{ define "body-class" }}template-search{{ end }}
 {{ define "head" }}
-    {{- with .OutputFormats.Get "json" -}} 
-        <link rel="preload" href="{{ .Permalink }}" as="fetch" crossorigin="anonymous">
-    {{- end -}}
+    {{ if not .Site.Params.serverSideSearchEndpoint }}
+        {{- with .OutputFormats.Get "json" -}} 
+            <link rel="preload" href="{{ .Permalink }}" as="fetch" crossorigin="anonymous">
+        {{- end -}}
+    {{ end }}
 {{ end }}
 {{ define "main" }}
 <form action="{{ .Permalink }}" class="search-form"{{ with .OutputFormats.Get "json" -}} data-json="{{ .Permalink }}"{{- end }}>
