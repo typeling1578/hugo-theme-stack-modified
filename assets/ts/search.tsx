@@ -135,8 +135,7 @@ class Search {
         const rawData = await this.getData();
         const results: pageData[] = [];
 
-        const regex = new RegExp(keywords.filter((v, index, arr) => {
-            arr[index] = escapeRegExp(v);
+        const regex = new RegExp(keywords.map(v => escapeRegExp(v)).filter(v => {
             return v.trim() !== '';
         }).join('|'), 'gi');
 
